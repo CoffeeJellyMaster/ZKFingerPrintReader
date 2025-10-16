@@ -133,32 +133,98 @@ void RunGuiDemo() {
             }
         }
 
-        // ==== Row 5: Acquire Live Fingerprint ====
-        if (DrawButton("Acquire Live Fingerprint", {150, 440, 250, 50}, PURPLE)) {
-            if (!deviceOpen) errorLog = "Device not connected.";
-            else {
-                statusMessage = "Capturing live fingerprint...";
-                std::vector<unsigned char> img;
-                int width = 0, height = 0;
-                if (fp.acquireLiveFingerprint(img, width, height)) {
-                    // Update texture
-                    if (hasLiveImage) UnloadTexture(liveTexture);
-                    liveImage = {
-                        .data = img.data(),
-                        .width = width,
-                        .height = height,
-                        .mipmaps = 1,
-                        .format = PIXELFORMAT_UNCOMPRESSED_GRAYSCALE
-                    };
-                    liveTexture = LoadTextureFromImage(liveImage);
-                    hasLiveImage = true;
-                    statusMessage = "Live fingerprint captured.";
-                    errorLog.clear();
-                } else {
-                    errorLog = fp.getLastError();
-                }
-            }
+        // // ==== Row 5: Acquire Live Fingerprint ====
+        // if (DrawButton("Acquire Live Fingerprint", {150, 440, 250, 50}, PURPLE)) {
+        //     if (!deviceOpen) errorLog = "Device not connected.";
+        //     else {
+        //         statusMessage = "Capturing live fingerprint...";
+        //         std::vector<unsigned char> img;
+        //         int width = 0, height = 0;
+        //         if (fp.acquireLiveFingerprint(img, width, height)) {
+        //             // Update texture
+        //             if (hasLiveImage) UnloadTexture(liveTexture);
+        //             liveImage = {
+        //                 .data = img.data(),
+        //                 .width = width,
+        //                 .height = height,
+        //                 .mipmaps = 1,
+        //                 .format = PIXELFORMAT_UNCOMPRESSED_GRAYSCALE
+        //             };
+        //             liveTexture = LoadTextureFromImage(liveImage);
+        //             hasLiveImage = true;
+        //             statusMessage = "Live fingerprint captured.";
+        //             errorLog.clear();
+        //         } else {
+        //             errorLog = fp.getLastError();
+        //         }
+        //     }
+        // }
+// === Acquire Live Fingerprint ===
+static bool waitingForFinger = false;
+static bool capturing = false;
+static double captureStartTime = 0;
+
+if (DrawButton("Acquire Live Fingerprint", {150, 440, 250, 50}, PURPLE)) {
+    if (!deviceOpen) {
+        errorLog = "Device not connected.";
+    } else {
+        waitingForFinger = true;
+        capturing = false;
+        statusMessage = "Place your finger on the sensor...";
+        errorLog.clear();
+    }
+}
+
+// If waiting for user input, keep checking the sensor
+if (waitingForFinger && deviceOpen) {
+    unsigned char paramBuf[4];
+    unsigned int size = 4;
+    int fingerDetected = 0;
+
+    // Finger detection loop — check SDK sensor state
+    int res = ZKFPM_GetParameters(fp.getHandle(), 101, paramBuf, &size); 
+    // (Param ID 101 used by most ZK SDKs to indicate finger presence — may vary per model)
+    if (res == ZKFP_ERR_OK) {
+        fingerDetected = *(int*)paramBuf;
+    }
+
+    if (fingerDetected) {
+        waitingForFinger = false;
+        capturing = true;
+        captureStartTime = GetTime();
+        statusMessage = "Finger detected. Capturing image...";
+    }
+}
+
+// When finger detected, capture image
+if (capturing && deviceOpen) {
+    std::vector<unsigned char> img;
+    int width = 0, height = 0;
+
+    if (fp.acquireLiveFingerprint(img, width, height)) {
+        if (hasLiveImage) UnloadTexture(liveTexture);
+        Image liveImage = {
+            .data = img.data(),
+            .width = width,
+            .height = height,
+            .mipmaps = 1,
+            .format = PIXELFORMAT_UNCOMPRESSED_GRAYSCALE
+        };
+        liveTexture = LoadTextureFromImage(liveImage);
+        hasLiveImage = true;
+
+        statusMessage = "Live fingerprint captured!";
+        errorLog.clear();
+        capturing = false;
+    } else {
+        // Show only once if timeout or error
+        if (GetTime() - captureStartTime > 3.0) {
+            errorLog = fp.getLastError();
+            capturing = false;
+            waitingForFinger = false;
         }
+    }
+}
 
         // ==== Right Column: Live Image ====
         DrawRectangleLines(600, 120, 300, 300, GRAY);

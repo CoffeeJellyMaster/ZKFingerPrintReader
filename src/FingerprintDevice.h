@@ -28,6 +28,7 @@ public:
     bool registerByImage(const std::string& imagePath);
     bool identifyByImage(const std::string& imagePath);
     bool acquireLiveFingerprint(std::vector<unsigned char>& imageBuffer, int& width, int& height);
+    inline HANDLE getHandle() const { return deviceHandle; }
 
 private:
     HANDLE deviceHandle = nullptr;
