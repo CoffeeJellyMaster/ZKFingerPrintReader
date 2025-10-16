@@ -138,6 +138,39 @@ bool FingerprintDevice::identifyByImage(const std::string& imagePath) {
 }
 
 // ===== Live Fingerprint Capture =====
+// bool FingerprintDevice::acquireLiveFingerprint(std::vector<unsigned char>& imageBuffer, int& width, int& height) {
+//     if (!deviceHandle) {
+//         lastError = "Device not opened.";
+//         return false;
+//     }
+
+//     unsigned char paramBuf[4];
+//     unsigned int size = 4;
+//     if (ZKFPM_GetParameters(deviceHandle, 1, paramBuf, &size) != ZKFP_ERR_OK) {
+//         lastError = "Failed to get image width.";
+//         return false;
+//     }
+//     width = *(int*)paramBuf;
+
+//     if (ZKFPM_GetParameters(deviceHandle, 2, paramBuf, &size) != ZKFP_ERR_OK) {
+//         lastError = "Failed to get image height.";
+//         return false;
+//     }
+//     height = *(int*)paramBuf;
+
+//     unsigned int imgSize = width * height;
+//     imageBuffer.resize(imgSize);
+//     unsigned char fpTemplate[2048];
+//     unsigned int templateSize = sizeof(fpTemplate);
+
+//     int res = ZKFPM_AcquireFingerprint(deviceHandle, imageBuffer.data(), imgSize, fpTemplate, &templateSize);
+//     if (res != ZKFP_ERR_OK) {
+//         lastError = "Failed to acquire fingerprint. Error code: " + std::to_string(res);
+//         return false;
+//     }
+
+//     return true;
+// }
 bool FingerprintDevice::acquireLiveFingerprint(std::vector<unsigned char>& imageBuffer, int& width, int& height) {
     if (!deviceHandle) {
         lastError = "Device not opened.";
@@ -146,6 +179,7 @@ bool FingerprintDevice::acquireLiveFingerprint(std::vector<unsigned char>& image
 
     unsigned char paramBuf[4];
     unsigned int size = 4;
+
     if (ZKFPM_GetParameters(deviceHandle, 1, paramBuf, &size) != ZKFP_ERR_OK) {
         lastError = "Failed to get image width.";
         return false;
@@ -160,6 +194,7 @@ bool FingerprintDevice::acquireLiveFingerprint(std::vector<unsigned char>& image
 
     unsigned int imgSize = width * height;
     imageBuffer.resize(imgSize);
+
     unsigned char fpTemplate[2048];
     unsigned int templateSize = sizeof(fpTemplate);
 
@@ -168,6 +203,18 @@ bool FingerprintDevice::acquireLiveFingerprint(std::vector<unsigned char>& image
         lastError = "Failed to acquire fingerprint. Error code: " + std::to_string(res);
         return false;
     }
+
+    // 🟣 Convert fingerprint template to HEX string
+    std::string hexTemplate;
+    char buf[3];
+    for (unsigned int i = 0; i < templateSize; ++i) {
+        sprintf(buf, "%02X", fpTemplate[i]);
+        hexTemplate += buf;
+    }
+
+// Inside acquireLiveFingerprint after converting to HEX:
+lastHexTemplate = hexTemplate;
+
 
     return true;
 }

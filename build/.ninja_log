@@ -1,9 +1,8 @@
 # ninja log v6
-1287	1482	7823125572200952	fingerprint_demo.exe	dc8b9bc3225b258
-52	6190	7823107213533635	CMakeFiles/fingerprint_demo.dir/src/FingerprintDevice.cpp.obj	b582d52fa13e585a
-47	5264	7823107213481784	CMakeFiles/fingerprint_demo.dir/src/main.cpp.obj	5711e28eac8d086e
-42	1286	7823125559746215	CMakeFiles/fingerprint_demo.dir/src/GuiDemo.cpp.obj	a9279b22ec83ad06
-39	1082	7823132011961934	CMakeFiles/fingerprint_demo.dir/src/main.cpp.obj	5711e28eac8d086e
-49	1348	7823132012049480	CMakeFiles/fingerprint_demo.dir/src/GuiDemo.cpp.obj	a9279b22ec83ad06
-44	1364	7823132012001949	CMakeFiles/fingerprint_demo.dir/src/FingerprintDevice.cpp.obj	b582d52fa13e585a
 1368	1570	7823132025241884	fingerprint_demo.exe	dc8b9bc3225b258
+44	1431	7823139487049707	CMakeFiles/fingerprint_demo.dir/src/FingerprintDevice.cpp.obj	b582d52fa13e585a
+39	1128	7823139486993472	CMakeFiles/fingerprint_demo.dir/src/main.cpp.obj	5711e28eac8d086e
+49	1348	7823132012049480	CMakeFiles/fingerprint_demo.dir/src/GuiDemo.cpp.obj	a9279b22ec83ad06
+45	1353	7823140232372112	CMakeFiles/fingerprint_demo.dir/src/GuiDemo.cpp.obj	a9279b22ec83ad06
+40	1387	7823140232332015	CMakeFiles/fingerprint_demo.dir/src/FingerprintDevice.cpp.obj	b582d52fa13e585a
+1387	1578	7823140245791265	fingerprint_demo.exe	dc8b9bc3225b258
