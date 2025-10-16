@@ -1,0 +1,3 @@
+C:/Users/Albert Soriano Jr/main/Commisions/SariliKongReader/build/CMakeFiles/fingerprint_demo.dir
+C:/Users/Albert Soriano Jr/main/Commisions/SariliKongReader/build/CMakeFiles/edit_cache.dir
+C:/Users/Albert Soriano Jr/main/Commisions/SariliKongReader/build/CMakeFiles/rebuild_cache.dir

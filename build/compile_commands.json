@@ -1,0 +1,20 @@
+[
+{
+  "directory": "C:/Users/Albert Soriano Jr/main/Commisions/SariliKongReader/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Soriano Jr/main/Commisions/SariliKongReader/include\" -I\"C:/Users/Albert Soriano Jr/main/Commisions/SariliKongReader/libs/x64\" -g -std=gnu++17 -IC:/msys64/ucrt64/include -o CMakeFiles\\fingerprint_demo.dir\\src\\main.cpp.obj -c \"C:\\Users\\Albert Soriano Jr\\main\\Commisions\\SariliKongReader\\src\\main.cpp\"",
+  "file": "C:\\Users\\Albert Soriano Jr\\main\\Commisions\\SariliKongReader\\src\\main.cpp",
+  "output": "CMakeFiles\\fingerprint_demo.dir\\src\\main.cpp.obj"
+},
+{
+  "directory": "C:/Users/Albert Soriano Jr/main/Commisions/SariliKongReader/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Soriano Jr/main/Commisions/SariliKongReader/include\" -I\"C:/Users/Albert Soriano Jr/main/Commisions/SariliKongReader/libs/x64\" -g -std=gnu++17 -IC:/msys64/ucrt64/include -o CMakeFiles\\fingerprint_demo.dir\\src\\FingerprintDevice.cpp.obj -c \"C:\\Users\\Albert Soriano Jr\\main\\Commisions\\SariliKongReader\\src\\FingerprintDevice.cpp\"",
+  "file": "C:\\Users\\Albert Soriano Jr\\main\\Commisions\\SariliKongReader\\src\\FingerprintDevice.cpp",
+  "output": "CMakeFiles\\fingerprint_demo.dir\\src\\FingerprintDevice.cpp.obj"
+},
+{
+  "directory": "C:/Users/Albert Soriano Jr/main/Commisions/SariliKongReader/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -I\"C:/Users/Albert Soriano Jr/main/Commisions/SariliKongReader/include\" -I\"C:/Users/Albert Soriano Jr/main/Commisions/SariliKongReader/libs/x64\" -g -std=gnu++17 -IC:/msys64/ucrt64/include -o CMakeFiles\\fingerprint_demo.dir\\src\\GuiDemo.cpp.obj -c \"C:\\Users\\Albert Soriano Jr\\main\\Commisions\\SariliKongReader\\src\\GuiDemo.cpp\"",
+  "file": "C:\\Users\\Albert Soriano Jr\\main\\Commisions\\SariliKongReader\\src\\GuiDemo.cpp",
+  "output": "CMakeFiles\\fingerprint_demo.dir\\src\\GuiDemo.cpp.obj"
+}
+]
